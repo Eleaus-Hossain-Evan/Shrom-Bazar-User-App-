@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:user_app/model/home_menu_model.dart';
 import 'package:user_app/variables/colors.dart';
 import 'package:user_app/variables/config.dart';
+import 'package:user_app/view/car/car_page.dart';
+import 'package:user_app/view/home/home_rent_page.dart';
+import 'package:user_app/view/shop/shop_page.dart';
 import '../view/worker/worker_page.dart';
 
 class HomeMenuTile extends StatelessWidget {
@@ -18,6 +21,15 @@ class HomeMenuTile extends StatelessWidget {
         onTap: (){
           if(menuModel.title == 'Worker'){
             Get.to(() => const WorkerPage());
+          }
+          if(menuModel.title == 'Car'){
+            Get.to(() => const CarPage());
+          }
+          if(menuModel.title == 'Home'){
+            Get.to(() => const HomeRentPage());
+          }
+          if(menuModel.title == 'Shop'){
+            Get.to(() => const ShopPage());
           }
         },
         borderRadius: BorderRadius.all(Radius.circular(dynamicSize(.02))),

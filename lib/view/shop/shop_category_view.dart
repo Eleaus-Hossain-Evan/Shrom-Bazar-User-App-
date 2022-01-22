@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:user_app/variables/config.dart';
 
-class WorkerCategoryView extends StatelessWidget {
-  String categoryName;
-  int numberOfWorkers;
-  String imageLink;
-  WorkerCategoryView({Key? key, required this.categoryName, required this.numberOfWorkers, required this.imageLink}) : super(key: key);
+class ShopCategoryView extends StatelessWidget {
+  String shopRentCategory;
+  String numberOfLocation;
 
+  ShopCategoryView({Key? key, required this.shopRentCategory, required this.numberOfLocation}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,8 +18,8 @@ class WorkerCategoryView extends StatelessWidget {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(dynamicSize(.03))
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(dynamicSize(.03))
           ),
           padding: EdgeInsets.all(dynamicSize(0.05)),
           child: Row(
@@ -30,16 +29,16 @@ class WorkerCategoryView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      categoryName,
+                      shopRentCategory,
                       style: TextStyle(
-                        color: Colors.teal,
-                        fontSize: dynamicSize(.05),
-                        fontWeight: FontWeight.w500
+                          color: Colors.green,
+                          fontSize: dynamicSize(.05),
+                          fontWeight: FontWeight.w500
                       ),
                     ),
                     SizedBox(height: dynamicSize(0.02)),
                     Text(
-                      '$numberOfWorkers people found',
+                      '$numberOfLocation locations found',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: dynamicSize(.035),
@@ -49,14 +48,6 @@ class WorkerCategoryView extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(dynamicSize(0.02)),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.black, width: 2)
-                ),
-                child: Image.asset(imageLink, width: dynamicSize(0.07), height: dynamicSize(0.07)),
-              )
             ],
           ),
         ),

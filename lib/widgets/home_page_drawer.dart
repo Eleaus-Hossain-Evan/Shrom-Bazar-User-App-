@@ -5,6 +5,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:user_app/variables/colors.dart';
 import 'package:user_app/variables/config.dart';
 import 'package:user_app/view/account_page.dart';
+import 'package:user_app/view/history.dart';
 import 'package:user_app/view/login_page.dart';
 
 class HomePageDrawer extends StatelessWidget {
@@ -53,6 +54,10 @@ class HomePageDrawer extends StatelessWidget {
                   SizedBox(height: dynamicSize(.04)),
 
                   ///Buttons
+                  DrawerButton(
+                      leading: LineAwesomeIcons.history,
+                      title: 'History',
+                      onTap: ()=>Get.to(()=>const History())),
                   DrawerButton(
                       leading: LineAwesomeIcons.user_plus,
                       title: 'Create Account',
