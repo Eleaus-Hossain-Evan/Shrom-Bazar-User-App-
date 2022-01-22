@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +21,9 @@ class DataController extends GetxController{
       size(s.height);
     }
     update();
-    print('Size: w=${s.width}, h=${s.height}');
+    if (kDebugMode) {
+      print('Size: w=${s.width}, h=${s.height}');
+    }
 
   }
 
