@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:user_app/controller/data_controller.dart';
-import 'package:user_app/variables/colors.dart';
 import 'package:user_app/variables/config.dart';
 import 'package:user_app/variables/style.dart';
 import 'package:user_app/view/detail_page/detail_page.dart';
 
+import 'widget/expanded_text_button.dart';
 import 'widget/single_list_catagory_view.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -54,7 +54,7 @@ class CategoryPage extends StatelessWidget {
             itemCount: numberOfWorkers,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
-                onTap: () => Get.to(() => const DetailsPage()),
+                onTap: () => Get.to(() => DetailsPage()),
                 child: SingleListCategoryView(categoryName: categoryName),
               );
             },
@@ -82,7 +82,8 @@ class FilterBottomSheetWidget extends StatefulWidget {
 }
 
 class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
-  RxInt isSelected = 0.obs;
+  RxInt isDaySelected = 0.obs;
+  RxInt isTimeSelected = 0.obs;
   RxString date = "".obs;
   final textController = TextEditingController();
 
@@ -90,7 +91,7 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: dynamicSize(.7),
       width: Get.width,
       padding: EdgeInsets.only(
         top: dynamicSize(.05),
@@ -104,120 +105,112 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
           topRight: Radius.circular(dynamicSize(.05)),
         ),
       ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    isSelected(0);
+      child: Obx(
+        () => Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ExpanedTextButton(
+                    text: "Today",
+                    isSelected: (isDaySelected.value == 0).obs,
+                    onPressed: () {
+                      isDaySelected(0);
+                      textController.clear();
+                    }),
+                SizedBox(
+                  width: dynamicSize(.05),
+                ),
+                ExpanedTextButton(
+                  text: "Yesterday",
+                  isSelected: (isDaySelected.value == 1).obs,
+                  onPressed: () {
+                    isDaySelected(1);
                     textController.clear();
                   },
-                  child: Obx(
-                    () => Container(
-                      padding: EdgeInsets.all(dynamicSize(.025)),
-                      decoration: BoxDecoration(
-                        color: isSelected.value == 0
-                            ? DataController.dc.getBGColor().withOpacity(.15)
-                            : Colors.grey.withOpacity(.3),
-                        border: Border.all(
-                          color: isSelected.value == 0
-                              ? DataController.dc.getBGColor()
-                              : Colors.grey,
-                        ),
-                        borderRadius: BorderRadius.circular(dynamicSize(.02)),
-                      ),
-                      child: Text(
-                        "Today",
-                        style: Styles.titleTextStyle.copyWith(
-                          fontSize: dynamicSize(.04),
-                          color: isSelected.value == 0
-                              ? DataController.dc.getBGColor()
-                              : Colors.black54,
-                        ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: dynamicSize(.02),
+            ),
+            Row(
+              children: [
+                Obx(
+                  () => Expanded(
+                    child: TextField(
+                      controller: textController,
+                      textAlign: TextAlign.center,
+                      style: Styles.titleTextStyle.copyWith(
+                        fontSize: dynamicSize(.04),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: dynamicSize(.05),
-              ),
-              // Expanded(
-              //   child: GestureDetector(
-              //     onTap: () {
-              //       isSelected(1);
-              //       textController.clear();
-              //     },
-              //     child: Obx(
-              //       () => Container(
-              //         padding: EdgeInsets.all(dynamicSize(.025)),
-              //         decoration: BoxDecoration(
-              //           color: isSelected.value == 1
-              //               ? DataController.dc.getBGColor().withOpacity(.15)
-              //               : Colors.grey.withOpacity(.3),
-              //           border: Border.all(
-              //             color: isSelected.value == 1
-              //                 ? DataController.dc.getBGColor()
-              //                 : Colors.grey,
-              //           ),
-              //           borderRadius: BorderRadius.circular(dynamicSize(.02)),
-              //         ),
-              //         child: Text(
-              //           "Yesterday",
-              //           style: Styles.titleTextStyle.copyWith(
-              //             fontSize: dynamicSize(.04),
-              //             color: isSelected.value == 1
-              //                 ? DataController.dc.getBGColor()
-              //                 : Colors.black54,
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              ExpanedTextButton(
-                text: "Yesterday",
-                isSelected: isSelected,
-                onPressed: () {
-                  isSelected(1);
-                  textController.clear();
-                },
-              ),
-            ],
-          ),
-          SizedBox(
-            height: dynamicSize(.02),
-          ),
-          Row(
-            children: [
-              Obx(
-                () => Expanded(
-                  child: TextField(
-                    controller: textController,
-                    textAlign: TextAlign.center,
-                    style: Styles.titleTextStyle.copyWith(
-                      fontSize: dynamicSize(.04),
-                    ),
-                  ),
+                SizedBox(
+                  width: dynamicSize(.05),
                 ),
+                ExpanedTextButton(
+                  text: "Select Date",
+                  isSelected: (isDaySelected.value == 3).obs,
+                  onPressed: () async => await _selectDate(context),
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: dynamicSize(.025)),
+              child: Divider(
+                color: DataController.dc.getBGColor(),
               ),
-              SizedBox(
-                width: dynamicSize(.05),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: dynamicSize(.05)),
+              child: Row(
+                children: [
+                  ExpanedTextButton(
+                    text: "Morning",
+                    isSelected: (isTimeSelected.value == 0).obs,
+                    onPressed: () {
+                      isTimeSelected(0);
+                    },
+                  ),
+                  SizedBox(
+                    width: dynamicSize(.05),
+                  ),
+                  ExpanedTextButton(
+                    text: "Afternone",
+                    isSelected: (isTimeSelected.value == 1).obs,
+                    onPressed: () {
+                      isTimeSelected(1);
+                    },
+                  ),
+                  SizedBox(
+                    width: dynamicSize(.05),
+                  ),
+                  ExpanedTextButton(
+                    text: "Evening",
+                    isSelected: (isTimeSelected.value == 2).obs,
+                    onPressed: () {
+                      isTimeSelected(2);
+                    },
+                  ),
+                ],
               ),
-              ExpanedTextButton(
-                text: "Select Date",
-                isSelected: isSelected,
-                onPressed: () async => await _selectDate(context),
-              ),
-            ],
-          ),
-          Row(
-            children: [],
-          )
-        ],
+            ),
+            Row(
+              children: [
+                ExpanedTextButton(
+                  text: "Apply",
+                  isSelected: true.obs,
+                  backgroundColor: true,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -234,54 +227,8 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
         selectedDate = picked;
         date.value = DateFormat.yMd().format(selectedDate);
         textController.text = DateFormat.yMd().format(selectedDate);
-        isSelected(2);
+        isDaySelected(2);
       });
     }
-  }
-}
-
-class ExpanedTextButton extends StatelessWidget {
-  const ExpanedTextButton({
-    Key? key,
-    required this.text,
-    required this.isSelected,
-    required this.onPressed,
-  }) : super(key: key);
-
-  final RxInt isSelected;
-  final VoidCallback onPressed;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => onPressed(),
-        child: Container(
-          padding: EdgeInsets.all(dynamicSize(.025)),
-          decoration: BoxDecoration(
-            color: isSelected.value == 2
-                ? DataController.dc.getBGColor().withOpacity(.15)
-                : Colors.grey.withOpacity(.3),
-            border: Border.all(
-              color: isSelected.value == 2
-                  ? DataController.dc.getBGColor()
-                  : Colors.grey,
-            ),
-            borderRadius: BorderRadius.circular(dynamicSize(.02)),
-          ),
-          child: Text(
-            text,
-            textAlign: TextAlign.center,
-            style: Styles.titleTextStyle.copyWith(
-              fontSize: dynamicSize(.04),
-              color: isSelected.value == 2
-                  ? DataController.dc.getBGColor()
-                  : Colors.black54,
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }

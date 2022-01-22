@@ -17,7 +17,7 @@ class HomeMenuTile extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(dynamicSize(.02))),
       child: InkWell(
         onTap: () {
-          DataController.dc.categoryName("Worker");
+          DataController.dc.categoryName("Car");
           if (menuModel.title == 'Worker') {
             Get.to(() => const WorkerPage());
           }

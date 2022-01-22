@@ -26,7 +26,7 @@ class SingleListCategoryView extends StatelessWidget {
       ),
       margin: EdgeInsets.symmetric(
         horizontal: dynamicSize(.03),
-        vertical: dynamicSize(.015),
+        vertical: dynamicSize(.025),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -41,7 +41,7 @@ class SingleListCategoryView extends StatelessWidget {
             ),
             child: Container(
               width: dynamicSize(.25),
-              height: dynamicSize(.3),
+              height: dynamicSize(.25),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.bottomRight,
@@ -70,7 +70,7 @@ class SingleListCategoryView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Mr. John Dau',
+                  'Mr. John Dao',
                   style: Styles.titleTextStyle,
                 ),
                 SizedBox(height: dynamicSize(.01)),
