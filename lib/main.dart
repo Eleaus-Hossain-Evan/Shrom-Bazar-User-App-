@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Variables.theme,
       home: const SplashScreen(),
+      ///Update from master branch
     );
   }
 }
