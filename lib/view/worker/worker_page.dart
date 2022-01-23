@@ -52,7 +52,7 @@ class _WorkerPageState extends State<WorkerPage> {
                   numberOfWorkers: 4,
                 )),
             child:
-                WorkerCategoryView(categoryName: "Plumber", numberOfWorkers: 4),
+                WorkerCategoryView(categoryName: "Plumber", numberOfWorkers: 4, imageLink: 'assets/worker-person.jpg'),
           );
         },
       );
