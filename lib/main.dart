@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       theme: Variables.theme,
       home: const SplashScreen(),
       ///Update from master branch
+      ///Update from master branch2
     );
     /// test comment
   }
