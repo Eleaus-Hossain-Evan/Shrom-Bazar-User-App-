@@ -22,5 +22,6 @@ class MyApp extends StatelessWidget {
       theme: Variables.theme,
       home: const SplashScreen(),
     );
+    /// test comment
   }
 }
