@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user_app/variables/colors.dart';
@@ -40,6 +41,7 @@ class DataController extends GetxController {
     }
     update();
     print('Size: w=${s.width}, h=${s.height}');
+   
   }
 
   bool isMobile() {

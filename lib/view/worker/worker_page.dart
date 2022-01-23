@@ -15,6 +15,18 @@ class WorkerPage extends StatefulWidget {
 class _WorkerPageState extends State<WorkerPage> {
   bool _showSearchBar = false;
   final TextEditingController _searchController = TextEditingController();
+  final List<String> categoryList = [
+    'Plumber',
+    'Electrician',
+    'Mason',
+    'Painter',
+  ];
+  final List<String> imageLink = [
+    'assets/plumbing_icon.png',
+    'assets/electrician_icon.png',
+    'assets/plumbing_icon.png',
+    'assets/electrician_icon.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +56,7 @@ class _WorkerPageState extends State<WorkerPage> {
           );
         },
       );
+
 
   /// search bar
   Widget _searchBar() => Container(

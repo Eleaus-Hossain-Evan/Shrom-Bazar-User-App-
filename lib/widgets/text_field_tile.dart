@@ -4,7 +4,7 @@ import 'package:user_app/variables/colors.dart';
 import 'package:user_app/variables/config.dart';
 
 class TextFieldBuilder extends StatefulWidget {
-  TextFieldBuilder({Key? key,
+  const TextFieldBuilder({Key? key,
     required this.controller,
     this.hintText,
     this.labelText,
@@ -16,7 +16,7 @@ class TextFieldBuilder extends StatefulWidget {
   final TextInputType? textInputType;
   final TextCapitalization? textCapitalization;
   final IconData? prefixIcon;
-  bool obscure;
+  final bool obscure;
 
   @override
   _TextFieldBuilderState createState() => _TextFieldBuilderState();
