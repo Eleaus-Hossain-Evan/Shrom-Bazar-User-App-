@@ -6,7 +6,8 @@ import 'package:user_app/variables/config.dart';
 import 'package:user_app/variables/style.dart';
 
 class DetailsPage extends StatelessWidget {
-  DetailsPage({Key? key}) : super(key: key);
+  DetailsPage({Key? key, required this.categoryName}) : super(key: key);
+  final String categoryName;
 
   final RxBool isRequest = false.obs;
 
@@ -63,11 +64,13 @@ class DetailsPage extends StatelessWidget {
                     Text(
                       'Mr. John Dao',
                       textAlign: TextAlign.start,
-                      style: Styles.titleTextStyle,
+                      style: Styles.titleTextStyle.copyWith(
+                        color: DataController.dc.getBGColor(),
+                      ),
                     ),
                     SizedBox(height: dynamicSize(.02)),
                     Text(
-                      "Plumber",
+                      categoryName,
                       textAlign: TextAlign.start,
                       style: Styles.subTitleTextStyle,
                     ),

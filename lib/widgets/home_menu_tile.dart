@@ -20,17 +20,20 @@ class HomeMenuTile extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(dynamicSize(.02))),
       child: InkWell(
         onTap: () {
-          DataController.dc.categoryName("Car");
           if (menuModel.title == 'Worker') {
+            DataController.dc.categoryName('Worker');
             Get.to(() => const WorkerPage());
           }
-          if(menuModel.title == 'Car'){
+          if (menuModel.title == 'Car') {
+            DataController.dc.categoryName('Car');
             Get.to(() => const CarPage());
           }
-          if(menuModel.title == 'Home'){
+          if (menuModel.title == 'Home') {
+            DataController.dc.categoryName('Home');
             Get.to(() => const HomeRentPage());
           }
-          if(menuModel.title == 'Shop'){
+          if (menuModel.title == 'Shop') {
+            DataController.dc.categoryName('Shop');
             Get.to(() => const ShopPage());
           }
         },

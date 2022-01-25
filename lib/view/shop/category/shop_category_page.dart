@@ -4,15 +4,14 @@ import 'package:intl/intl.dart';
 import 'package:user_app/controller/data_controller.dart';
 import 'package:user_app/variables/config.dart';
 import 'package:user_app/variables/style.dart';
+import 'package:user_app/view/category/widget/expanded_text_button.dart';
 import 'package:user_app/view/detail_page/detail_page.dart';
 import 'package:user_app/view/shop/category/shop_single_list_category_view.dart';
 import 'package:user_app/view/shop/detail/shop_detaile_pagte.dart';
+import 'package:user_app/view/shop/filter_shop.dart';
 
-import 'widget/expanded_text_button.dart';
-import 'widget/single_list_catagory_view.dart';
-
-class CategoryPage extends StatelessWidget {
-  CategoryPage(
+class ShopCategoryPage extends StatelessWidget {
+  ShopCategoryPage(
       {Key? key, required this.categoryName, required this.numberOfWorkers})
       : super(key: key);
 
@@ -33,30 +32,52 @@ class CategoryPage extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         title: Text(categoryName),
-        actions: [
-          GestureDetector(
-            onTap: () => _showFilterDialog(context),
-            child: Padding(
-              padding: EdgeInsets.only(right: dynamicSize(.05)),
-              child: const Icon(
-                Icons.filter_list,
-              ),
-            ),
-          ),
-        ],
       ),
       body: _bodyUI(),
     );
   }
 
-  Widget _bodyUI() => ListView.builder(
-        itemCount: numberOfWorkers,
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-              onTap: () =>
-                  Get.to(() => DetailsPage(categoryName: categoryName)),
-              child: SingleListCategoryView(categoryName: categoryName));
-        },
+  Widget _bodyUI() => Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: dynamicSize(.04),
+              vertical: dynamicSize(.02),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "$numberOfWorkers properties found",
+                  style: Styles.titleTextStyle.copyWith(
+                    color: Colors.black54,
+                    fontSize: dynamicSize(.05),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => Get.to(() => FilterShopPage()),
+                  child: Padding(
+                    padding: EdgeInsets.only(right: dynamicSize(.05)),
+                    child: const Icon(
+                      Icons.filter_list,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: numberOfWorkers,
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                onTap: () =>
+                    Get.to(() => ShopDetailsPage(categoryName: categoryName)),
+                child: ShopSingleListCategoryView(categoryName: categoryName),
+              );
+            },
+          ),
+        ],
       );
 
   _showFilterDialog(BuildContext context) {

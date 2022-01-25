@@ -5,8 +5,8 @@ import 'package:user_app/variables/colors.dart';
 import 'package:user_app/variables/config.dart';
 import 'package:user_app/variables/style.dart';
 
-class SingleListCategoryView extends StatelessWidget {
-  const SingleListCategoryView({
+class ShopSingleListCategoryView extends StatelessWidget {
+  const ShopSingleListCategoryView({
     Key? key,
     required this.categoryName,
   }) : super(key: key);
@@ -55,7 +55,7 @@ class SingleListCategoryView extends StatelessWidget {
               child: Container(
                 decoration: const BoxDecoration(),
                 child: Image.asset(
-                  "assets/worker-person.jpg",
+                  "assets/work-space1.png",
                   fit: BoxFit.cover,
                 ),
               ),
@@ -70,7 +70,7 @@ class SingleListCategoryView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Mr. John Dao',
+                  "\u2316 Uttora",
                   style: Styles.titleTextStyle.copyWith(
                     color: DataController.dc.getBGColor(),
                   ),
@@ -89,11 +89,11 @@ class SingleListCategoryView extends StatelessWidget {
                         //   ),
                         // ),
                         TextSpan(
-                          text: "  \u2316",
+                          text: "  \u00B7  ",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: "Uttora",
+                          text: "2000sqft",
                           style: Styles.subTitleTextStyle,
                         ),
                       ]),
@@ -118,32 +118,7 @@ class SingleListCategoryView extends StatelessWidget {
               ],
             ),
           ),
-          // SizedBox(width: dynamicSize(.07)),
-          // Container(
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //     children: [
-          //       Material(
-          //         color:
-          //             DataController.dc.getBGColor().withOpacity(.09),
-          //         borderRadius: BorderRadius.circular(dynamicSize(.02)),
-          //         child: IconButton(
-          //           icon: Icon(Icons.call),
-          //           onPressed: () {},
-          //         ),
-          //       ),
-          //       Material(
-          //         color:
-          //             DataController.dc.getBGColor().withOpacity(.09),
-          //         borderRadius: BorderRadius.circular(dynamicSize(.02)),
-          //         child: IconButton(
-          //           icon: Icon(Icons.chat),
-          //           onPressed: () {},
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
+
           Row(
             children: [
               Icon(
@@ -151,9 +126,9 @@ class SingleListCategoryView extends StatelessWidget {
                 color: DataController.dc.getBGColor().withOpacity(.5),
               ),
               const Text(
-                "1200\u09F3",
+                "20000\u09F3",
                 style: TextStyle(
-                  color: Color(0xff6e798c),
+                  color: Color(0xFF636B79),
                   fontSize: 16,
                 ),
               ),
