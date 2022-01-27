@@ -4,7 +4,7 @@ import 'package:user_app/variables/static_variables.dart';
 import 'package:user_app/view/splash_screen.dart';
 import 'controller/data_controller.dart';
 
-void main()async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Variables.portraitMood;
   runApp(const MyApp());
@@ -13,7 +13,7 @@ void main()async{
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     final DataController c = Get.put(DataController());
     //Variables.mainConfig();
     return GetMaterialApp(
@@ -21,9 +21,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Variables.theme,
       home: const SplashScreen(),
+
       ///Update from master branch
       ///Update from master branch2
     );
+
     /// test comment
   }
 }
